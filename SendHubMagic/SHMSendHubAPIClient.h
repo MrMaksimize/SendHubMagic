@@ -1,6 +1,7 @@
-#import "AFHTTPClient.h"
+#import "AFRESTClient.h"
+#import "AFIncrementalStore.h"
 
-@interface SHMSendHubAPIClient : AFHTTPClient
+@interface SHMSendHubAPIClient : AFRESTClient
 + (SHMSendHubAPIClient *)sharedClient;
 
 @end
