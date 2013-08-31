@@ -7,21 +7,41 @@
 //
 
 #import "SHMAppDelegate.h"
-
-#import "SHMViewController.h"
+//#import "SHMViewController.h"
+#import "SHMContactsTableViewController.h"
+#import "SHMIncrementalStore.h"
 
 @implementation SHMAppDelegate
 
+@synthesize window = _window;
+@synthesize navigationController = _navigationController;
+@synthesize managedObjectContext = __managedObjectContext;
+@synthesize managedObjectModel = __managedObjectModel;
+@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024
+                                                         diskCapacity:20 * 1024 * 1024
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+
+    //[[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    /*NSString *nibName = @"SHMViewController_iPad";
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[SHMViewController alloc] initWithNibName:@"SHMViewController_iPhone" bundle:nil];
-    } else {
-        self.viewController = [[SHMViewController alloc] initWithNibName:@"SHMViewController_iPad" bundle:nil];
+        nibName = @"SHMViewController_iPhone";
     }
-    self.window.rootViewController = self.viewController;
+
+    UIViewController *rootViewController = [[SHMViewController alloc] initWithNibName:nibName
+                                                                               bundle:nil];*/
+    UITableViewController *rootViewController = [[SHMContactsTableViewController alloc] init];
+
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -50,7 +70,80 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self saveContext];
 }
+
+- (void)saveContext {
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // TODO Replace this implementation with code to handle the error appropriately.
+            // abort()  = Crash Log + Terminate
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+#pragma mark - Core Data
+
+// Managed Object Context for the application.
+// If context doesn't exist already, created and bound to persistent store coordinator for app.
+- (NSManagedObjectContext *)managedObjectContext {
+    if (__managedObjectContext != nil) {
+        return __managedObjectContext;
+    }
+
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+
+    return __managedObjectContext;
+}
+
+// Managed Object Model for application.
+// If doesn't exist yet, created from application model.
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (__managedObjectModel != nil) {
+        return __managedObjectModel;
+    }
+
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"SendHub" withExtension:@"momd"];
+    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
+    return __managedObjectModel;
+}
+
+// Persistent Store coordinator.
+// If doesn't exist, created and the application's store added to it.
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (__persistentStoreCoordinator != nil) {
+        return __persistentStoreCoordinator;
+    }
+
+    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+
+    AFIncrementalStore *incrementalStore = (AFIncrementalStore *)[__persistentStoreCoordinator addPersistentStoreWithType:[SHMIncrementalStore type] configuration:nil URL:nil options:nil error:nil];
+    NSError *error = nil;
+    if (![incrementalStore.backingPersistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+
+    return __persistentStoreCoordinator;
+}
+
+#pragma mark - Application's Documents directory
+
+// Returns the URL to the application's Documents directory.
+- (NSURL *)applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+
 
 @end

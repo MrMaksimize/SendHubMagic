@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class SHMViewController;
-
 @interface SHMAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UINavigationController *navigationController;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (strong, nonatomic) SHMViewController *viewController;
+- (void)saveContext;
+- (NSURL *)applicationDocumentsDirectory;
 
 @end
