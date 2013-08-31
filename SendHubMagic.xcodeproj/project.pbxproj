@@ -19,7 +19,8 @@
 		C3B4B1D817D22C330095C7CD /* SHMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B1D717D22C330095C7CD /* SHMViewController.m */; };
 		C3B4B1DB17D22C330095C7CD /* SHMViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1D917D22C330095C7CD /* SHMViewController_iPhone.xib */; };
 		C3B4B1DE17D22C330095C7CD /* SHMViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1DC17D22C330095C7CD /* SHMViewController_iPad.xib */; };
-		C3B4B21C17D230150095C7CD /* SendHubAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B21B17D230150095C7CD /* SendHubAPIClient.m */; };
+		C3B4B21C17D230150095C7CD /* SHMSendHubAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B21B17D230150095C7CD /* SHMSendHubAPIClient.m */; };
+		C3B4B22317D23D3C0095C7CD /* SHMSendHubContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B22217D23D3C0095C7CD /* SHMSendHubContacts.m */; };
 		E50246BB485941CA881F5042 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E339A9A8C38F487AB8FBC3D2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +43,11 @@
 		C3B4B1D717D22C330095C7CD /* SHMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHMViewController.m; sourceTree = "<group>"; };
 		C3B4B1DA17D22C330095C7CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHMViewController_iPhone.xib; sourceTree = "<group>"; };
 		C3B4B1DD17D22C330095C7CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHMViewController_iPad.xib; sourceTree = "<group>"; };
-		C3B4B21A17D230150095C7CD /* SendHubAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendHubAPIClient.h; sourceTree = "<group>"; };
-		C3B4B21B17D230150095C7CD /* SendHubAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendHubAPIClient.m; sourceTree = "<group>"; };
+		C3B4B21A17D230150095C7CD /* SHMSendHubAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMSendHubAPIClient.h; sourceTree = "<group>"; };
+		C3B4B21B17D230150095C7CD /* SHMSendHubAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMSendHubAPIClient.m; sourceTree = "<group>"; };
+		C3B4B22017D23CCD0095C7CD /* SHMSendHubAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMSendHubAPIConstants.h; sourceTree = "<group>"; };
+		C3B4B22117D23D3C0095C7CD /* SHMSendHubContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMSendHubContacts.h; sourceTree = "<group>"; };
+		C3B4B22217D23D3C0095C7CD /* SHMSendHubContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMSendHubContacts.m; sourceTree = "<group>"; };
 		E339A9A8C38F487AB8FBC3D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,8 +98,7 @@
 		C3B4B1C417D22C330095C7CD /* SendHubMagic */ = {
 			isa = PBXGroup;
 			children = (
-				C3B4B21A17D230150095C7CD /* SendHubAPIClient.h */,
-				C3B4B21B17D230150095C7CD /* SendHubAPIClient.m */,
+				C3B4B21E17D238380095C7CD /* Client */,
 				C3B4B1CD17D22C330095C7CD /* SHMAppDelegate.h */,
 				C3B4B1CE17D22C330095C7CD /* SHMAppDelegate.m */,
 				C3B4B1D617D22C330095C7CD /* SHMViewController.h */,
@@ -119,6 +122,18 @@
 				C3B4B1D417D22C330095C7CD /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C3B4B21E17D238380095C7CD /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				C3B4B21A17D230150095C7CD /* SHMSendHubAPIClient.h */,
+				C3B4B21B17D230150095C7CD /* SHMSendHubAPIClient.m */,
+				C3B4B22017D23CCD0095C7CD /* SHMSendHubAPIConstants.h */,
+				C3B4B22117D23D3C0095C7CD /* SHMSendHubContacts.h */,
+				C3B4B22217D23D3C0095C7CD /* SHMSendHubContacts.m */,
+			);
+			name = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,7 +242,8 @@
 				C3B4B1CB17D22C330095C7CD /* main.m in Sources */,
 				C3B4B1CF17D22C330095C7CD /* SHMAppDelegate.m in Sources */,
 				C3B4B1D817D22C330095C7CD /* SHMViewController.m in Sources */,
-				C3B4B21C17D230150095C7CD /* SendHubAPIClient.m in Sources */,
+				C3B4B21C17D230150095C7CD /* SHMSendHubAPIClient.m in Sources */,
+				C3B4B22317D23D3C0095C7CD /* SHMSendHubContacts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
