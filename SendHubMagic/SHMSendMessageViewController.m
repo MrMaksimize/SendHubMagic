@@ -63,7 +63,17 @@
     // Using button to send a message rather than Done on keyboard since it's more natural.
     if (sender == self.sendMessageButton) {
         [self.messageBodyTextView resignFirstResponder];
-        [self saveAndSendMessage];
+
+        if (self.messageBodyTextView.text == nil || [self.messageBodyTextView.text isEqualToString:@""]) {
+            // Yeah we could've totally done w/o the abstraction,
+            // but this is a view that might have more than 1 thing happening.
+            [self.messageBodyTextView setBackgroundColor:[UIColor redColor]];
+            [self showMessageLabelWithMessage:@"Hey, I'm not sending a blank message!" andColor:[UIColor redColor]];
+        }
+        else {
+            [self saveAndSendMessage];
+        }
+
     }
 }
 
@@ -115,18 +125,10 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if (textView == self.messageBodyTextView && [textView.text isEqualToString:@"Send Message"]) {
         [self.messageBodyTextView setText:@""];
-        // Also could live without abstraction here, but better to have it.
-        [self hideMessageLabelAndClearState];
     }
+    // Could live without abstraction here, but better to have it.
+    [self hideMessageLabelAndClearState];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if (textView.text == nil || [textView.text isEqualToString:@""]) {
-        // Yeah we could've totally done w/o the abstraction,
-        // but this is a view that might have more than 1 thing happening.
-        [textView setBackgroundColor:[UIColor redColor]];
-        [self showMessageLabelWithMessage:@"Hey, I'm not sending a blank message!" andColor:[UIColor redColor]];
-    }
-}
 
 @end

@@ -15,6 +15,7 @@
 //Regex validates US #'s with leading 1
 
 static NSString * const kPhoneNumberRegexString = @"^(?:\\+?1[-. ]?)?\\(?([2-9][0-8][0-9])\\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4})$";
+static NSString * const kNameValidationRegexString = @"([^A-Za-z\\s])";
 
 @interface SHMContactDetailViewController ()
 
@@ -68,8 +69,8 @@ static NSString * const kPhoneNumberRegexString = @"^(?:\\+?1[-. ]?)?\\(?([2-9][
     }
     // Add save button to Navbar programmatically.
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveContactEntry:)];
-
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -118,6 +119,8 @@ static NSString * const kPhoneNumberRegexString = @"^(?:\\+?1[-. ]?)?\\(?([2-9][
 
 - (void)saveContactEntry:(id)sender
 {
+    [self.phoneTextField resignFirstResponder];
+    [self.nameTextField resignFirstResponder];
     if (contact && !createMode) {
         [contact setName:self.nameTextField.text];
         [contact setPhoneNumber:self.phoneTextField.text];
@@ -169,6 +172,21 @@ static NSString * const kPhoneNumberRegexString = @"^(?:\\+?1[-. ]?)?\\(?([2-9][
         if (!matches || [matches count] == 0) {
             return NO;
         }
+    }
+
+    else if (textField == self.nameTextField) {
+        // Let's make sure there's no numbers in the name
+        NSError *error = NULL;
+
+        // TODO review this
+        NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:kNameValidationRegexString options:0 error:&error];
+
+        NSArray *matches = [regex matchesInString:self.nameTextField.text options:0 range:NSMakeRange(0, [self.nameTextField.text length])];
+
+        if ([matches count] > 0) {
+            return NO;
+        }
+
     }
 
     // Always assume good things about people.
