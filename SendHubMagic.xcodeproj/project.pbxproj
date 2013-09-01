@@ -26,6 +26,8 @@
 		C3B4B23D17D291CF0095C7CD /* SHMSendMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B23B17D291CF0095C7CD /* SHMSendMessageViewController.xib */; };
 		C3B4B25817D2ADF70095C7CD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B25717D2ADF70095C7CD /* Contact.m */; };
 		C3B4B26117D2BB3C0095C7CD /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B26017D2BB3C0095C7CD /* Message.m */; };
+		C3B4B26717D3D79D0095C7CD /* hat.png in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B26617D3D79D0095C7CD /* hat.png */; };
+		C3B4B26917D3D7A10095C7CD /* hat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B26817D3D7A10095C7CD /* hat@2x.png */; };
 		E50246BB485941CA881F5042 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E339A9A8C38F487AB8FBC3D2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		C3B4B25717D2ADF70095C7CD /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		C3B4B25F17D2BB3C0095C7CD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		C3B4B26017D2BB3C0095C7CD /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		C3B4B26617D3D79D0095C7CD /* hat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hat.png; path = ../hat.png; sourceTree = "<group>"; };
+		C3B4B26817D3D7A10095C7CD /* hat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hat@2x.png"; path = "../hat@2x.png"; sourceTree = "<group>"; };
 		E339A9A8C38F487AB8FBC3D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,13 +130,11 @@
 		C3B4B1C517D22C330095C7CD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C3B4B26A17D3D7E70095C7CD /* Graphics */,
 				C3B4B1C617D22C330095C7CD /* SendHubMagic-Info.plist */,
 				C3B4B1C717D22C330095C7CD /* InfoPlist.strings */,
 				C3B4B1CA17D22C330095C7CD /* main.m */,
 				C3B4B1CC17D22C330095C7CD /* SendHubMagic-Prefix.pch */,
-				C3B4B1D017D22C330095C7CD /* Default.png */,
-				C3B4B1D217D22C330095C7CD /* Default@2x.png */,
-				C3B4B1D417D22C330095C7CD /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -181,6 +183,18 @@
 				C3B4B23B17D291CF0095C7CD /* SHMSendMessageViewController.xib */,
 			);
 			name = XIBs;
+			sourceTree = "<group>";
+		};
+		C3B4B26A17D3D7E70095C7CD /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				C3B4B26817D3D7A10095C7CD /* hat@2x.png */,
+				C3B4B26617D3D79D0095C7CD /* hat.png */,
+				C3B4B1D017D22C330095C7CD /* Default.png */,
+				C3B4B1D217D22C330095C7CD /* Default@2x.png */,
+				C3B4B1D417D22C330095C7CD /* Default-568h@2x.png */,
+			);
+			name = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +257,8 @@
 				C3B4B1D517D22C330095C7CD /* Default-568h@2x.png in Resources */,
 				C3B4B23817D289680095C7CD /* SHMContactDetailViewController.xib in Resources */,
 				C3B4B23D17D291CF0095C7CD /* SHMSendMessageViewController.xib in Resources */,
+				C3B4B26717D3D79D0095C7CD /* hat.png in Resources */,
+				C3B4B26917D3D7A10095C7CD /* hat@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
