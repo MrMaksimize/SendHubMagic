@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet UITextView *messageBodyTextView;
 @property (nonatomic, strong) IBOutlet UILabel *sendToLabel;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UIButton *sendMessageButton;
 
 - (id)initWithContact:(Contact *)initialContact;

@@ -21,6 +21,9 @@
     NSManagedObjectContext *_managedObjectContext;
 }
 
+
+#pragma mark - View LifeCycle
+
 - (id)initWithContact:(Contact *)initialContact
 {
     // We can initialize with no contact in the use case of being able to create one.
@@ -53,6 +56,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UI Ops
+
 - (IBAction)didPressButton:(id)sender
 {
     // Using button to send a message rather than Done on keyboard since it's more natural.
@@ -61,6 +66,29 @@
         [self saveAndSendMessage];
     }
 }
+
+// Resign first responder when user touches somewhere else.
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.messageBodyTextView resignFirstResponder];
+}
+
+- (void)showMessageLabelWithMessage:(NSString *)message andColor:(UIColor *)color
+{
+    // Hide first in case it was displayed before.
+    [self.messageLabel setHidden:YES];
+    [self.messageLabel setText:message];
+    [self.messageLabel setTextColor:color];
+    [self.messageLabel setHidden:NO];
+}
+
+- (void)hideMessageLabelAndClearState
+{
+    [self.messageBodyTextView setBackgroundColor:[UIColor cyanColor]];
+    [self.messageLabel setText:@""];
+    [self.messageLabel setHidden:YES];
+}
+
+#pragma mark - Message Saving and Sending
 
 - (void)saveAndSendMessage
 {
@@ -74,6 +102,10 @@
     NSError *error = nil;
     if (![_managedObjectContext save:&error]) {
         NSLog(@"Error: %@", error);
+        [self showMessageLabelWithMessage:@"Error Sending Message" andColor:[UIColor redColor]];
+    }
+    else {
+        [self showMessageLabelWithMessage:@"Message is on the way!" andColor:[UIColor blueColor]];
     }
 
 }
@@ -83,13 +115,18 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if (textView == self.messageBodyTextView && [textView.text isEqualToString:@"Send Message"]) {
         [self.messageBodyTextView setText:@""];
+        // Also could live without abstraction here, but better to have it.
+        [self hideMessageLabelAndClearState];
     }
 }
 
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    // TODO for some reason this method never gets called. Come back and fix.  Text View does not resign first responder.
-    NSLog(@"TEST");
-    return YES;
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text == nil || [textView.text isEqualToString:@""]) {
+        // Yeah we could've totally done w/o the abstraction,
+        // but this is a view that might have more than 1 thing happening.
+        [textView setBackgroundColor:[UIColor redColor]];
+        [self showMessageLabelWithMessage:@"Hey, I'm not sending a blank message!" andColor:[UIColor redColor]];
+    }
 }
 
 @end

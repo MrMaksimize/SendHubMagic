@@ -7,7 +7,6 @@
 //
 
 #import "SHMAppDelegate.h"
-//#import "SHMViewController.h"
 #import "SHMContactsTableViewController.h"
 #import "SHMIncrementalStore.h"
 
@@ -30,14 +29,6 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    /*NSString *nibName = @"SHMViewController_iPad";
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        nibName = @"SHMViewController_iPhone";
-    }
-
-    UIViewController *rootViewController = [[SHMViewController alloc] initWithNibName:nibName
-                                                                               bundle:nil];*/
     UITableViewController *rootViewController = [[SHMContactsTableViewController alloc] init];
 
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];

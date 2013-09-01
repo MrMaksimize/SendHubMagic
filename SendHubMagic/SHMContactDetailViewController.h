@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *nameTextField;
 @property (nonatomic, strong) IBOutlet UITextField *phoneTextField;
 @property (nonatomic, strong) IBOutlet UIButton *messageButton;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 
 - (id)initWithContactOrNil:(Contact *)contactOrNil;
 - (IBAction)didPressButton:(id)sender;

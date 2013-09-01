@@ -7,6 +7,7 @@
 
 @implementation SHMSendHubAPIClient
 
+#pragma mark - Initialization
 
 // Creates a single instance
 + (instancetype)sharedClient {
@@ -33,6 +34,7 @@
     return self;
 }
 
+#pragma mark - Request Modifiers
 
 - (NSMutableURLRequest *)requestForFetchRequest:(NSFetchRequest *)fetchRequest
                                     withContext:(NSManagedObjectContext *)context
@@ -44,19 +46,20 @@
     return request;
 }
 
-- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
-                       pathForObjectWithID:(NSManagedObjectID *)objectID
-                               withContext:(NSManagedObjectContext *)context {
-
-    NSMutableURLRequest *request = [super requestWithMethod:method pathForObjectWithID:objectID withContext:context];
-
-    return request;
-
-}
 
 - (NSMutableURLRequest *)requestForInsertedObject:(NSManagedObject *)insertedObject
 {
     NSMutableURLRequest *request = [super requestForInsertedObject:insertedObject];
+    [request setURL:[self modifiedURLForRequest:request]];
+
+    return request;
+}
+
+
+- (NSMutableURLRequest *)requestForUpdatedObject:(NSManagedObject *)updatedObject
+{
+    NSMutableURLRequest *request = [super requestForUpdatedObject:updatedObject];
+
     [request setURL:[self modifiedURLForRequest:request]];
 
     return request;
@@ -67,15 +70,6 @@
     NSString *newURLPath = [NSString stringWithFormat:@"%@/?username=%@&api_key=%@", [request.URL absoluteString], kSendHubAPIPhoneNumber, kSendHubAPIKey];
 
     return [NSURL URLWithString:newURLPath];
-}
-
-- (NSMutableURLRequest *)requestForUpdatedObject:(NSManagedObject *)updatedObject
-{
-    NSMutableURLRequest *request = [super requestForUpdatedObject:updatedObject];
-
-    [request setURL:[self modifiedURLForRequest:request]];
-
-    return request;
 }
 
 - (NSDictionary *)representationOfAttributes:(NSDictionary *)attributes
@@ -103,10 +97,13 @@
         Contact *contact = (Contact *)managedObject;
         [representation setObject:contact.phoneNumber forKey:@"number"];
         [representation setObject:contact.name forKey:@"name"];
+        [representation setObject:contact.id_str forKey:@"id"];
     }
 
     return representation;
 }
+
+#pragma mark - Respone Modifiers
 
 - (id)representationOrArrayOfRepresentationsOfEntity:(NSEntityDescription *)entity
                                   fromResponseObject:(id)responseObject {
@@ -138,7 +135,6 @@
                                  inManagedObjectContext:(NSManagedObjectContext *)context
 {
     // We're not fetching remote attributes per contact just yet.
-    //return [[[objectID entity] name] isEqualToString:@"Contact"];
     return NO;
 }
 
@@ -147,7 +143,6 @@
                         inManagedObjectContext:(NSManagedObjectContext *)context
 {
     // We're not fetching remote relationships yet.
-    //return [[[objectID entity] name] isEqualToString:@"Contact"];
     return NO;
 }
 
