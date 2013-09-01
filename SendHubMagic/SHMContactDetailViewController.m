@@ -19,6 +19,8 @@
 @implementation SHMContactDetailViewController {
     Contact *contact;
     BOOL createMode;
+
+    NSManagedObjectContext *_managedObjectContext;
 }
 
 - (id)initWithContactOrNil:(Contact *)contactOrNil
@@ -28,6 +30,10 @@
     if (!self) {
         return nil;
     }
+
+    // Set up MOC.
+    _managedObjectContext = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+
     if (!contactOrNil) {
         createMode = YES;
         self.title = @"Add A New Contact";
@@ -39,7 +45,8 @@
     }
     // We already have phone number and name of the contact which is all we need for this screen.
     // However, if we wanted to get the full contact record, say at contacts/123, we can do a core data
-    // fetch here. -- but we'd need to bring in NSManagedObjectContext and a fetchedResultsController
+    // fetch here.
+
     return self;
 }
 
@@ -52,6 +59,9 @@
         [self.phoneTextField setText:contact.phoneNumber];
         [self.messageButton setHidden:NO];
     }
+    // Add save button to Navbar programmatically.
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveContactEntry:)];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +75,20 @@
     if (sender == self.messageButton) {
         SHMSendMessageViewController *sendMessageViewController = [[SHMSendMessageViewController alloc] initWithContact:contact];
         [self.navigationController pushViewController:sendMessageViewController animated:YES];
+    }
+}
+
+- (void)saveContactEntry:(id)sender
+{
+    if (contact && !createMode) {
+        [contact setName:self.nameTextField.text];
+        [contact setPhoneNumber:self.phoneTextField.text];
+        if ([contact hasChanges]) {
+            NSError *error = nil;
+            if (![_managedObjectContext save:&error]) {
+                NSLog(@"Error: %@", error);
+            }
+        }
     }
 }
 

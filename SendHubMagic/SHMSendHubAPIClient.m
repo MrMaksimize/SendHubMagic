@@ -38,9 +38,8 @@
                                     withContext:(NSManagedObjectContext *)context
 {
     NSMutableURLRequest *request = [super requestForFetchRequest:fetchRequest withContext:context];
-    
-    NSString *newURLPath = [NSString stringWithFormat:@"%@/?username=%@&api_key=%@", [request.URL absoluteString], kSendHubAPIPhoneNumber, kSendHubAPIKey];
-    [request setURL:[NSURL URLWithString:newURLPath]];
+
+    [request setURL:[self modifiedURLForRequest:request]];
 
     return request;
 }
@@ -55,11 +54,26 @@
 
 }
 
-- (NSMutableURLRequest *)requestForInsertedObject:(NSManagedObject *)insertedObject {
+- (NSMutableURLRequest *)requestForInsertedObject:(NSManagedObject *)insertedObject
+{
     NSMutableURLRequest *request = [super requestForInsertedObject:insertedObject];
+    [request setURL:[self modifiedURLForRequest:request]];
 
+    return request;
+}
+
+- (NSURL *)modifiedURLForRequest:(NSMutableURLRequest *)request
+{
     NSString *newURLPath = [NSString stringWithFormat:@"%@/?username=%@&api_key=%@", [request.URL absoluteString], kSendHubAPIPhoneNumber, kSendHubAPIKey];
-    [request setURL:[NSURL URLWithString:newURLPath]];
+
+    return [NSURL URLWithString:newURLPath];
+}
+
+- (NSMutableURLRequest *)requestForUpdatedObject:(NSManagedObject *)updatedObject
+{
+    NSMutableURLRequest *request = [super requestForUpdatedObject:updatedObject];
+
+    [request setURL:[self modifiedURLForRequest:request]];
 
     return request;
 }
@@ -69,16 +83,26 @@
 {
     NSMutableDictionary *representation = [NSMutableDictionary dictionaryWithDictionary:
                                            [super representationOfAttributes:attributes ofManagedObject:managedObject]];
+
+    // Messages.
     if ([managedObject.entity.name isEqualToString:@"Message"]) {
        // TODO - idk if it's good practice to use the Core Data model here.
         Message *message = (Message *)managedObject;
         NSArray *contactsArray = [message.contacts allObjects];
         NSMutableArray *contactsToSend = [[NSMutableArray alloc] init];
         for (Contact* contact in contactsArray) {
-            //TODO see if I can use object_id instead of storing the id string directly.
+            //TODO see if I can use AFIS's id instead of storing the id string directly.
             [contactsToSend addObject:contact.id_str];
         }
         [representation setObject:contactsToSend forKey:@"contacts"];
+    }
+    // Contacts
+    if ([managedObject.entity.name isEqualToString:@"Contact"]) {
+        // Transform Phone Number to Number.
+        // Also looks like AFIS likes to send update entries only.  For Sendhub, we need all.
+        Contact *contact = (Contact *)managedObject;
+        [representation setObject:contact.phoneNumber forKey:@"number"];
+        [representation setObject:contact.name forKey:@"name"];
     }
 
     return representation;
