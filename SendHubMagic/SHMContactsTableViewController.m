@@ -8,12 +8,14 @@
 
 #import <CoreData/CoreData.h>
 #import "SHMContactsTableViewController.h"
+#import "SHMContactDetailViewController.h"
 
 #import "Contact.h"
 
 
 @interface SHMContactsTableViewController () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController *_fetchedResultsController;
+    NSManagedObjectContext *_managedObjectContext;
 }
 
 -(void)refetchData;
@@ -40,6 +42,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.title = NSLocalizedString(@"Contacts", nil);
+
+    _managedObjectContext =  [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Contact"];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:
@@ -48,7 +52,7 @@
                                                                    selector:@selector(localizedStandardCompare:)]];
     fetchRequest.returnsObjectsAsFaults = NO;
     
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[(id)[[UIApplication sharedApplication] delegate] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     _fetchedResultsController.delegate = self;
     [_fetchedResultsController performFetch:nil];
     
@@ -78,6 +82,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     }
     
     NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
@@ -90,7 +95,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    NSLog(@"I HAVE SELECTED");
+    Contact *contact = (Contact *)[_fetchedResultsController objectAtIndexPath:indexPath];
+     SHMContactDetailViewController *detailViewController = [[SHMContactDetailViewController alloc]
+                                                             initWithContactOrNil:contact];
+
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

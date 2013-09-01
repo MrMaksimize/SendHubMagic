@@ -16,15 +16,17 @@
 		C3B4B1D117D22C330095C7CD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1D017D22C330095C7CD /* Default.png */; };
 		C3B4B1D317D22C330095C7CD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1D217D22C330095C7CD /* Default@2x.png */; };
 		C3B4B1D517D22C330095C7CD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1D417D22C330095C7CD /* Default-568h@2x.png */; };
-		C3B4B1D817D22C330095C7CD /* SHMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B1D717D22C330095C7CD /* SHMViewController.m */; };
-		C3B4B1DB17D22C330095C7CD /* SHMViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1D917D22C330095C7CD /* SHMViewController_iPhone.xib */; };
-		C3B4B1DE17D22C330095C7CD /* SHMViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B1DC17D22C330095C7CD /* SHMViewController_iPad.xib */; };
 		C3B4B21C17D230150095C7CD /* SHMSendHubAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B21B17D230150095C7CD /* SHMSendHubAPIClient.m */; };
 		C3B4B22317D23D3C0095C7CD /* SHMSendHubContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B22217D23D3C0095C7CD /* SHMSendHubContacts.m */; };
 		C3B4B22617D2684B0095C7CD /* SHMContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B22517D2684B0095C7CD /* SHMContactsTableViewController.m */; };
 		C3B4B22917D272510095C7CD /* SendHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B22717D272510095C7CD /* SendHub.xcdatamodeld */; };
-		C3B4B22D17D273690095C7CD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B22C17D273690095C7CD /* Contact.m */; };
 		C3B4B23017D2751A0095C7CD /* SHMIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B22F17D2751A0095C7CD /* SHMIncrementalStore.m */; };
+		C3B4B23717D289680095C7CD /* SHMContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B23517D289680095C7CD /* SHMContactDetailViewController.m */; };
+		C3B4B23817D289680095C7CD /* SHMContactDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B23617D289680095C7CD /* SHMContactDetailViewController.xib */; };
+		C3B4B23C17D291CF0095C7CD /* SHMSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B23A17D291CE0095C7CD /* SHMSendMessageViewController.m */; };
+		C3B4B23D17D291CF0095C7CD /* SHMSendMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B4B23B17D291CF0095C7CD /* SHMSendMessageViewController.xib */; };
+		C3B4B25817D2ADF70095C7CD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B25717D2ADF70095C7CD /* Contact.m */; };
+		C3B4B26117D2BB3C0095C7CD /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4B26017D2BB3C0095C7CD /* Message.m */; };
 		E50246BB485941CA881F5042 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E339A9A8C38F487AB8FBC3D2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -43,10 +45,6 @@
 		C3B4B1D017D22C330095C7CD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C3B4B1D217D22C330095C7CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C3B4B1D417D22C330095C7CD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C3B4B1D617D22C330095C7CD /* SHMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHMViewController.h; sourceTree = "<group>"; };
-		C3B4B1D717D22C330095C7CD /* SHMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHMViewController.m; sourceTree = "<group>"; };
-		C3B4B1DA17D22C330095C7CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHMViewController_iPhone.xib; sourceTree = "<group>"; };
-		C3B4B1DD17D22C330095C7CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHMViewController_iPad.xib; sourceTree = "<group>"; };
 		C3B4B21A17D230150095C7CD /* SHMSendHubAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMSendHubAPIClient.h; sourceTree = "<group>"; };
 		C3B4B21B17D230150095C7CD /* SHMSendHubAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMSendHubAPIClient.m; sourceTree = "<group>"; };
 		C3B4B22017D23CCD0095C7CD /* SHMSendHubAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMSendHubAPIConstants.h; sourceTree = "<group>"; };
@@ -55,10 +53,18 @@
 		C3B4B22417D2684B0095C7CD /* SHMContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMContactsTableViewController.h; sourceTree = "<group>"; };
 		C3B4B22517D2684B0095C7CD /* SHMContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMContactsTableViewController.m; sourceTree = "<group>"; };
 		C3B4B22817D272510095C7CD /* SendHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SendHub.xcdatamodel; sourceTree = "<group>"; };
-		C3B4B22B17D273690095C7CD /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		C3B4B22C17D273690095C7CD /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		C3B4B22E17D2751A0095C7CD /* SHMIncrementalStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMIncrementalStore.h; sourceTree = "<group>"; };
 		C3B4B22F17D2751A0095C7CD /* SHMIncrementalStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMIncrementalStore.m; sourceTree = "<group>"; };
+		C3B4B23417D289680095C7CD /* SHMContactDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMContactDetailViewController.h; sourceTree = "<group>"; };
+		C3B4B23517D289680095C7CD /* SHMContactDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMContactDetailViewController.m; sourceTree = "<group>"; };
+		C3B4B23617D289680095C7CD /* SHMContactDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHMContactDetailViewController.xib; sourceTree = "<group>"; };
+		C3B4B23917D291CE0095C7CD /* SHMSendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMSendMessageViewController.h; sourceTree = "<group>"; };
+		C3B4B23A17D291CE0095C7CD /* SHMSendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMSendMessageViewController.m; sourceTree = "<group>"; };
+		C3B4B23B17D291CF0095C7CD /* SHMSendMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHMSendMessageViewController.xib; sourceTree = "<group>"; };
+		C3B4B25617D2ADF70095C7CD /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		C3B4B25717D2ADF70095C7CD /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		C3B4B25F17D2BB3C0095C7CD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		C3B4B26017D2BB3C0095C7CD /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		E339A9A8C38F487AB8FBC3D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,9 +156,11 @@
 		C3B4B22A17D272580095C7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C3B4B25F17D2BB3C0095C7CD /* Message.h */,
+				C3B4B26017D2BB3C0095C7CD /* Message.m */,
 				C3B4B22717D272510095C7CD /* SendHub.xcdatamodeld */,
-				C3B4B22B17D273690095C7CD /* Contact.h */,
-				C3B4B22C17D273690095C7CD /* Contact.m */,
+				C3B4B25617D2ADF70095C7CD /* Contact.h */,
+				C3B4B25717D2ADF70095C7CD /* Contact.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -162,6 +170,10 @@
 			children = (
 				C3B4B22417D2684B0095C7CD /* SHMContactsTableViewController.h */,
 				C3B4B22517D2684B0095C7CD /* SHMContactsTableViewController.m */,
+				C3B4B23417D289680095C7CD /* SHMContactDetailViewController.h */,
+				C3B4B23517D289680095C7CD /* SHMContactDetailViewController.m */,
+				C3B4B23917D291CE0095C7CD /* SHMSendMessageViewController.h */,
+				C3B4B23A17D291CE0095C7CD /* SHMSendMessageViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -169,6 +181,8 @@
 		C3B4B23217D2769B0095C7CD /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				C3B4B23617D289680095C7CD /* SHMContactDetailViewController.xib */,
+				C3B4B23B17D291CF0095C7CD /* SHMSendMessageViewController.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -176,10 +190,6 @@
 		C3B4B23317D278F40095C7CD /* Dep */ = {
 			isa = PBXGroup;
 			children = (
-				C3B4B1D917D22C330095C7CD /* SHMViewController_iPhone.xib */,
-				C3B4B1DC17D22C330095C7CD /* SHMViewController_iPad.xib */,
-				C3B4B1D617D22C330095C7CD /* SHMViewController.h */,
-				C3B4B1D717D22C330095C7CD /* SHMViewController.m */,
 				C3B4B22117D23D3C0095C7CD /* SHMSendHubContacts.h */,
 				C3B4B22217D23D3C0095C7CD /* SHMSendHubContacts.m */,
 			);
@@ -244,8 +254,8 @@
 				C3B4B1D117D22C330095C7CD /* Default.png in Resources */,
 				C3B4B1D317D22C330095C7CD /* Default@2x.png in Resources */,
 				C3B4B1D517D22C330095C7CD /* Default-568h@2x.png in Resources */,
-				C3B4B1DB17D22C330095C7CD /* SHMViewController_iPhone.xib in Resources */,
-				C3B4B1DE17D22C330095C7CD /* SHMViewController_iPad.xib in Resources */,
+				C3B4B23817D289680095C7CD /* SHMContactDetailViewController.xib in Resources */,
+				C3B4B23D17D291CF0095C7CD /* SHMSendMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,13 +301,15 @@
 			files = (
 				C3B4B1CB17D22C330095C7CD /* main.m in Sources */,
 				C3B4B1CF17D22C330095C7CD /* SHMAppDelegate.m in Sources */,
-				C3B4B1D817D22C330095C7CD /* SHMViewController.m in Sources */,
 				C3B4B21C17D230150095C7CD /* SHMSendHubAPIClient.m in Sources */,
 				C3B4B22317D23D3C0095C7CD /* SHMSendHubContacts.m in Sources */,
 				C3B4B22617D2684B0095C7CD /* SHMContactsTableViewController.m in Sources */,
 				C3B4B22917D272510095C7CD /* SendHub.xcdatamodeld in Sources */,
-				C3B4B22D17D273690095C7CD /* Contact.m in Sources */,
 				C3B4B23017D2751A0095C7CD /* SHMIncrementalStore.m in Sources */,
+				C3B4B23717D289680095C7CD /* SHMContactDetailViewController.m in Sources */,
+				C3B4B23C17D291CF0095C7CD /* SHMSendMessageViewController.m in Sources */,
+				C3B4B25817D2ADF70095C7CD /* Contact.m in Sources */,
+				C3B4B26117D2BB3C0095C7CD /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,22 +322,6 @@
 				C3B4B1C817D22C330095C7CD /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C3B4B1D917D22C330095C7CD /* SHMViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C3B4B1DA17D22C330095C7CD /* en */,
-			);
-			name = SHMViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		C3B4B1DC17D22C330095C7CD /* SHMViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C3B4B1DD17D22C330095C7CD /* en */,
-			);
-			name = SHMViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

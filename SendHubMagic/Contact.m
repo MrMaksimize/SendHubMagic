@@ -7,11 +7,14 @@
 //
 
 #import "Contact.h"
+#import "Message.h"
 
 
 @implementation Contact
 
 @dynamic name;
 @dynamic phoneNumber;
+@dynamic id_str;
+@dynamic messages;
 
 @end

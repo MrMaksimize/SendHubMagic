@@ -2,6 +2,9 @@
 #import "AFJSONRequestOperation.h"
 #import "SHMSendHubAPIConstants.h"
 
+#import "Message.h"
+#import "Contact.h"
+
 @implementation SHMSendHubAPIClient
 
 
@@ -25,28 +28,9 @@
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [self setDefaultHeader:@"Accept" value:@"application/json"];
     [self setDefaultHeader:@"Content-Type" value:@"application/json"];
+    [self setParameterEncoding:AFJSONParameterEncoding];
     
     return self;
-}
-
-- (void)sendAuthedRequestWithPath:(NSString*)path
-                            method:(NSString*)method
-                            params:(NSDictionary*)params
-                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
-    
-    NSString *requestPath = [NSString stringWithFormat:
-                             @"%@/%@?username=%@&api_key=%@",
-                             kSendHubAPIBaseURLString,
-                             path,
-                             kSendHubAPIPhoneNumber,
-                             kSendHubAPIKey];
-
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:requestPath]];
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-    [self enqueueHTTPRequestOperation:operation];
 }
 
 
@@ -54,13 +38,50 @@
                                     withContext:(NSManagedObjectContext *)context
 {
     NSMutableURLRequest *request = [super requestForFetchRequest:fetchRequest withContext:context];
-
-    NSLog(@"stop");
-    // Whatever AFIS decides our request should look like, we know we have to append the ?username and ?api_key params to the url.
+    
     NSString *newURLPath = [NSString stringWithFormat:@"%@/?username=%@&api_key=%@", [request.URL absoluteString], kSendHubAPIPhoneNumber, kSendHubAPIKey];
     [request setURL:[NSURL URLWithString:newURLPath]];
 
     return request;
+}
+
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
+                       pathForObjectWithID:(NSManagedObjectID *)objectID
+                               withContext:(NSManagedObjectContext *)context {
+
+    NSMutableURLRequest *request = [super requestWithMethod:method pathForObjectWithID:objectID withContext:context];
+
+    return request;
+
+}
+
+- (NSMutableURLRequest *)requestForInsertedObject:(NSManagedObject *)insertedObject {
+    NSMutableURLRequest *request = [super requestForInsertedObject:insertedObject];
+
+    NSString *newURLPath = [NSString stringWithFormat:@"%@/?username=%@&api_key=%@", [request.URL absoluteString], kSendHubAPIPhoneNumber, kSendHubAPIKey];
+    [request setURL:[NSURL URLWithString:newURLPath]];
+
+    return request;
+}
+
+- (NSDictionary *)representationOfAttributes:(NSDictionary *)attributes
+                             ofManagedObject:(NSManagedObject *)managedObject
+{
+    NSMutableDictionary *representation = [NSMutableDictionary dictionaryWithDictionary:
+                                           [super representationOfAttributes:attributes ofManagedObject:managedObject]];
+    if ([managedObject.entity.name isEqualToString:@"Message"]) {
+       // TODO - idk if it's good practice to use the Core Data model here.
+        Message *message = (Message *)managedObject;
+        NSArray *contactsArray = [message.contacts allObjects];
+        NSMutableArray *contactsToSend = [[NSMutableArray alloc] init];
+        for (Contact* contact in contactsArray) {
+            //TODO see if I can use object_id instead of storing the id string directly.
+            [contactsToSend addObject:contact.id_str];
+        }
+        [representation setObject:contactsToSend forKey:@"contacts"];
+    }
+
+    return representation;
 }
 
 - (id)representationOrArrayOfRepresentationsOfEntity:(NSEntityDescription *)entity
