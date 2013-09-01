@@ -82,7 +82,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     
     NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
